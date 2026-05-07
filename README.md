@@ -1,3 +1,24 @@
-# AI_project_sensitive
-# AI_project_sensitive
-# AI_project_sensitive
+# 🏠 AI 斷捨離心理決策系統
+
+這是一個結合 NLP 情感分析與心理動機的輔助系統，幫助使用者判斷物品是否該留。
+
+## 💡 專案亮點
+* **三合一模型**：整合情緒分類、強度回歸、動機預測（馬斯洛/瑞斯）。
+* **領域微調**：針對斷捨離語境進行了 200 筆資料的精準微調。
+* **計分邏輯**：綜合心理學需求與情緒強度給出 0-100 的保留建議。
+
+## 📁 資料夾結構
+* `app.py`: 系統進入點。
+* `core/`: 存放模型架構與推論引擎。
+* `scripts/`: 訓練與微調腳本。
+* `models/`: 存放 .pt 權重檔。
+* `data/`: 訓練與微調資料。
+
+## 🛠️ 快速啟動
+1. `pip install -r requirements.txt`
+2. 將權重檔放入 `models/`
+3. `python3 app.py`
+
+## ⚙️ 技術規格
+* BERT-base-multilingual-cased
+* WSL2 (Ubuntu 22.04), RTX 5060
