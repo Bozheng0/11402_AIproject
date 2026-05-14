@@ -20,18 +20,18 @@ $$Score = Score_{base} + \Delta Score_{emotion} + \Delta Score_{motivation}$$
     * 系統預設的中立基準點。
 
 * **情緒修正 ($\Delta Score_{emotion}$)**：
-    * **正向增益**：$+(30 \times Intensity \times Confidence_{emo})$
-    * **負向抑制**：$-(35 \times Intensity \times Confidence_{emo})$
+    * **正向增益**：`+(30 * Intensity * Confidence_emo)`
+    * **負向抑制**：`-(35 * Intensity * Confidence_emo)`
     * *註：Intensity 為情感強度，Confidence 為模型分類信心度。*
 
 * **動機修正 ($\Delta Score_{motivation}$)**：
-    * **傳承/社交補償 (Legacy/Social)**：$+(35 \times Confidence_{maslow})$
-    * **成就/榮譽加成 (Status/Honor)**：$+(20 \times Confidence_{reiss})$
-    * **囤積行為抑制 (Stability)**：$-(5 \times Confidence_{maslow})$
+    * **傳承/社交補償 (Legacy/Social)**：`+(35 * Confidence_maslow)`
+    * **成就/榮譽加成 (Status/Honor)**：`+(20 * Confidence_reiss)`
+    * **囤積行為抑制 (Stability)**：`-(5 * Confidence_maslow)`
 
 * **特殊補償機制（悲傷處理）**：
-    * 若判定為**紀念性質 (Legacy)**：$+(25 \times Intensity)$
-    * 若判定為**純屬痛苦回憶**：$-(20 \times Intensity)$
+    * 若判定為**紀念性質 (Legacy)**：`+(25 * Intensity)`
+    * 若判定為**純屬痛苦回憶**：`-(20 * Intensity)`
 
 ## 資料夾結構
 * `app.py`: 系統進入點。
