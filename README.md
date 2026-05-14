@@ -41,3 +41,4 @@ $$Score = Score_{base} + \Delta Score_{emotion} + \Delta Score_{motivation}$$
 * **Model**: BERT-base-multilingual-cased
 * **Environment**: WSL2 (Ubuntu 22.04), RTX 5060
 # 11402_AIproject
+# 11402_AIproject
