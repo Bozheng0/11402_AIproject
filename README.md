@@ -8,29 +8,30 @@
 * **情緒識別 (Emotion)**：使用 **GoEmotions** 資料集 (28種情緒)，理解使用者對物品的情感類別。
 * **情感強度 (Intensity)**：使用 **SemEval-2018** 資料集，將情感連結量化為數值 (0.0 - 1.5)。
 * **心理動機 (Motivation)**：結合 **StoryCommons** 資料集，解析馬斯洛需求與瑞斯 (Reiss) 16 種基本動機。
-* **領域微調 (Domain Adaptation)**：使用自建 **Gold Standard 200** 斷捨離專屬資料集進行最後的語境校準。
+* **領域微調 (Domain Adaptation)**：使用自建資料集進行最後的語境校準。
 
 ## 核心決策評估演算法
 系統總分為 0 至 100 分，計算公式如下：
 $$Score = Score_{base} + \Delta Score_{emotion} + \Delta Score_{motivation}$$
 
-## 參數詳細說明：
+### 參數詳細說明：
 
-* **基礎分 (\$Score_{base}\$)**：\`50.0\`
+* **基礎分 ($Score_{base}$)**：`50.0`
     * 系統預設的中立基準點。
 
-* **情緒修正 (\$ \Delta Score_{emotion} \$)**：
-    * **正向增益**：\$+(30 \times Intensity \times Confidence_{emo})\$
-    * **負向抑制**：\$-(35 \times Intensity \times Confidence_{emo})\$
+* **情緒修正 ($\Delta Score_{emotion}$)**：
+    * **正向增益**：$+(30 \times Intensity \times Confidence_{emo})$
+    * **負向抑制**：$-(35 \times Intensity \times Confidence_{emo})$
+    * *註：Intensity 為情感強度，Confidence 為模型分類信心度。*
 
-* **動機修正 (\$ \Delta Score_{motivation} \$)**：
-    * **傳承/社交補償 (Legacy/Social)**：\$+(35 \times Confidence_{maslow})\$
-    * **成就/榮譽加成 (Status/Honor)**：\$+(20 \times Confidence_{reiss})\$
-    * **囤積行為抑制 (Stability)**：\$+(5 \times Confidence_{maslow})\$
+* **動機修正 ($\Delta Score_{motivation}$)**：
+    * **傳承/社交補償 (Legacy/Social)**：$+(35 \times Confidence_{maslow})$
+    * **成就/榮譽加成 (Status/Honor)**：$+(20 \times Confidence_{reiss})$
+    * **囤積行為抑制 (Stability)**：$-(5 \times Confidence_{maslow})$
 
 * **特殊補償機制（悲傷處理）**：
-    * 若判定為**紀念性質 (Legacy)**：\$+(25 \times Intensity)\$
-    * 若判定為**純屬痛苦回憶**：\$-(20 \times Intensity)\$
+    * 若判定為**紀念性質 (Legacy)**：$+(25 \times Intensity)$
+    * 若判定為**純屬痛苦回憶**：$-(20 \times Intensity)$
 
 ## 資料夾結構
 * `app.py`: 系統進入點。
