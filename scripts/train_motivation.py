@@ -73,7 +73,7 @@ def train():
     optimizer = optim.AdamW(model.parameters(), lr=2e-5)
     
     print(f"🔥 開始多任務訓練，權重將儲存至: {SAVE_PATH}")
-    for epoch in range(3):
+    for epoch in range(10):
         model.train()
         loop = tqdm(loader)
         for batch in loop:
@@ -82,7 +82,7 @@ def train():
             loss = nn.CrossEntropyLoss()(m_out, batch['m_label'].to(DEVICE)) + nn.CrossEntropyLoss()(r_out, batch['r_label'].to(DEVICE))
             loss.backward()
             optimizer.step()
-            loop.set_description(f"Epoch [{epoch+1}/3]")
+            loop.set_description(f"Epoch [{epoch+1}/10]")
             loop.set_postfix(loss=loss.item())
 
     # 確保儲存路徑的資料夾存在

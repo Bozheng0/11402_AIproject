@@ -13,19 +13,9 @@ class FinalEvaluator:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
 
         # 1. 標籤定義 (必須與微調時的順序完全一致)
-        self.go_labels = [
-            'admiration', 'amusement', 'anger', 'annoyance', 'approval', 'caring', 
-            'confusion', 'curiosity', 'desire', 'disappointment', 'disapproval', 
-            'disgust', 'embarrassment', 'excitement', 'fear', 'gratitude', 'grief', 
-            'joy', 'love', 'nervousness', 'optimism', 'pride', 'realization', 
-            'relief', 'remorse', 'sadness', 'surprise', 'neutral'
-        ]
+        self.go_labels = ['admiration', 'amusement', 'anger', 'annoyance', 'approval', 'caring', 'confusion', 'curiosity', 'desire', 'disappointment', 'disapproval', 'disgust', 'embarrassment', 'excitement', 'fear', 'gratitude', 'grief', 'joy', 'love', 'nervousness', 'optimism', 'pride', 'realization', 'relief', 'remorse', 'sadness', 'surprise', 'neutral']
         self.m_labels = ['social', 'doing', 'legacy', 'stability', 'neutral']
-        self.reiss_labels = [
-            'status', 'approval', 'independence', 'order', 'social_contact', 
-            'honor', 'idealism', 'vengeance', 'romance', 'family', 
-            'food', 'physical_exercise', 'saving', 'curiosity', 'tranquility', 'neutral'
-        ]
+        self.reiss_labels = ['status', 'approval', 'independence', 'order', 'social_contact', 'honor', 'idealism', 'vengeance', 'romance', 'family', 'food', 'physical_exercise', 'saving', 'curiosity', 'tranquility', 'neutral']
 
         # 2. 自動路徑定位邏輯
         # 取得當前檔案 (inference_engine.py) 的絕對路徑，並指向上一層的 models 資料夾
