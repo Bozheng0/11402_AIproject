@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>斷捨離 AI 助理</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+  <header class="top-nav">
+    <button class="nav-text-button" type="button" id="navStartBtn">Start</button>
+    <div class="brand-logo">Re : space</div>
+    <span class="nav-note">Declutter AI</span>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <p class="hero-kicker">Declutter AI Assistant</p>
+        <h1>Re:space</h1>
+        <p class="hero-subtitle">
+          讓每個物品，都找到更適合的去處
+        </p>
+        <p class="hero-description">
+          透過使用價值、情感價值與二手潛力，協助你做出更溫柔、更有脈絡的斷捨離決定。
+        </p>
+        <button type="button" class="primary-cta" id="startBtn">
+          開始整理我的物品
+        </button>
+      </div>
+    </section>
+
+    <section class="intro-section">
+      <p class="section-eyebrow">How it works</p>
+      <h2>用四個步驟，重新理解一件物品</h2>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <span>01</span>
+          <h3>選擇類別</h3>
+          <p>從生活場景出發，先判斷物品屬於哪一種整理情境。</p>
+        </article>
+
+        <article class="feature-card">
+          <span>02</span>
+          <h3>建立小檔案</h3>
+          <p>輸入名稱、品牌與照片，讓物品從抽象雜物變成可被評估的對象。</p>
+        </article>
+
+        <article class="feature-card">
+          <span>03</span>
+          <h3>描述使用狀態</h3>
+          <p>記錄使用時間與頻率，理解它是否仍在你的生活中發揮作用。</p>
+        </article>
+
+        <article class="feature-card">
+          <span>04</span>
+          <h3>交給 AI 分析</h3>
+          <p>綜合使用價值、情感價值與二手潛力，產生整理建議。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="wizard-section" id="wizard">
+      <div class="wizard-shell">
+        <div class="wizard-header">
+          <div>
+            <p class="section-eyebrow">Step <span id="currentStepText">1</span> / 4</p>
+            <h2 id="stepTitle">今天想整理哪一類物品？</h2>
+          </div>
+
+          <div class="progress">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <form id="itemForm">
+          <section class="step active" data-step="1">
+            <p class="step-hint">
+              先選擇最接近的物品類別。這一步會幫助 AI 初步判斷物品可能的使用情境與二手潛力。
+            </p>
+
+            <div class="category-grid">
+              <label class="category-card">
+                <input type="radio" name="category" value="furniture_bedding" required />
+                <div class="category-visual">
+                  <span>🛏️</span>
+                </div>
+                <h3>家具寢具</h3>
+                <p>床架、書桌、椅子、枕頭、棉被</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="electronics_3c" />
+                <div class="category-visual">
+                  <span>💻</span>
+                </div>
+                <h3>家電與3C</h3>
+                <p>手機、耳機、電風扇、吹風機、螢幕</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="clothing_accessories" />
+                <div class="category-visual">
+                  <span>🧥</span>
+                </div>
+                <h3>服飾配件</h3>
+                <p>外套、褲子、包包、鞋子、飾品</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="beauty_personal_care" />
+                <div class="category-visual">
+                  <span>🧴</span>
+                </div>
+                <h3>美妝個護</h3>
+                <p>保養品、化妝品、香水、美髮用品</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="books_office" />
+                <div class="category-visual">
+                  <span>📚</span>
+                </div>
+                <h3>書籍辦公</h3>
+                <p>課本、小說、筆記本、文具、資料夾</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="kitchen_living" />
+                <div class="category-visual">
+                  <span>🍽️</span>
+                </div>
+                <h3>生活廚具</h3>
+                <p>杯子、鍋具、餐具、收納盒、清潔用品</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="sports_hobbies" />
+                <div class="category-visual">
+                  <span>🎸</span>
+                </div>
+                <h3>運動愛好</h3>
+                <p>球拍、瑜珈墊、樂器、畫具、收藏品</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="memorabilia" />
+                <div class="category-visual">
+                  <span>🎁</span>
+                </div>
+                <h3>紀念品</h3>
+                <p>照片、卡片、禮物、旅行紀念物</p>
+              </label>
+
+              <label class="category-card">
+                <input type="radio" name="category" value="other" />
+                <div class="category-visual">
+                  <span>✨</span>
+                </div>
+                <h3>其他</h3>
+                <p>無法歸類，或具有特殊用途的物品</p>
+              </label>
+            </div>
+          </section>
+
+          <section class="step" data-step="2">
+            <p class="step-hint">
+              幫這個物品建立一張小檔案。照片目前只會作為前端預覽，不會送進模型。
+            </p>
+
+            <div class="choice-summary" id="summaryStep2"></div>
+
+            <div class="item-profile-grid">
+              <label class="image-uploader" for="itemImage">
+                <input id="itemImage" type="file" accept="image/*" />
+                <div class="upload-placeholder" id="uploadPlaceholder">
+                  <span class="upload-icon">＋</span>
+                  <p>上傳物品照片</p>
+                  <small>可選，但會讓結果頁更有完整感</small>
+                </div>
+                <img id="imagePreview" alt="物品預覽圖" />
+              </label>
+
+              <div class="profile-fields">
+                <div class="field">
+                  <label for="itemName">物品名稱</label>
+                  <input id="itemName" type="text" placeholder="例如：舊背包、檯燈、外套" required />
+                </div>
+
+                <div class="field">
+                  <label for="brand">品牌</label>
+                  <input id="brand" type="text" placeholder="例如：MUJI、IKEA、Apple，若無品牌可留空" />
+                </div>
+
+                <div class="live-summary">
+                  <p>Current Item</p>
+                  <h3 id="summaryName">尚未命名的物品</h3>
+                  <span id="summaryBrand">品牌未填寫</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="step" data-step="3">
+            <p class="step-hint">
+              接著告訴 AI：這件物品陪伴你多久了？它現在還常出現在你的生活裡嗎？
+            </p>
+
+            <div class="choice-summary" id="summaryStep3"></div>
+
+            <div class="two-columns">
+              <div class="field">
+                <label for="usagePeriod">目前用了多久</label>
+                <select id="usagePeriod" required>
+                  <option value="" disabled selected>請選擇使用時間</option>
+                  <option value="within_1_year">1 年內</option>
+                  <option value="1_to_3_years">1-3 年</option>
+                  <option value="3_to_5_years">3-5 年</option>
+                  <option value="5_to_8_years">5-8 年</option>
+                  <option value="over_8_years">8 年以上</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="usageFrequency">使用頻率</label>
+                <select id="usageFrequency" required>
+                  <option value="" disabled selected>請選擇使用頻率</option>
+                  <option value="new">全新未使用</option>
+                  <option value="daily">每天使用</option>
+                  <option value="weekly">一週使用</option>
+                  <option value="monthly">每月使用</option>
+                  <option value="yearly">每年使用</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <p>Keep what matters.</p>
+              <span>Rehome waht still has value.</span>
+            </div>
+          </section>
+
+          <section class="step" data-step="4">
+            <p class="step-hint">
+              最後補充物品狀態與情感連結。這些文字會影響 AI 的判斷理由。
+            </p>
+
+            <div class="choice-summary" id="summaryStep4"></div>
+
+            <div class="field">
+              <label for="objectiveDescription">客觀描述</label>
+              <textarea
+                id="objectiveDescription"
+                rows="5"
+                placeholder="請描述物品外觀、功能狀態、瑕疵、缺件等，例如：背包外觀完整，但拉鍊有些卡，底部有輕微磨損。"
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="emotionalDescription">情感描述</label>
+              <textarea
+                id="emotionalDescription"
+                rows="5"
+                maxlength="128"
+                placeholder="請描述你對這個物品的回憶或情感，例如：這是大學剛入學時買的背包，有一點紀念意義。"
+              ></textarea>
+              <p class="char-count">
+                還可以輸入 <span id="emotionDescCount">128</span> 字
+              </p>
+            </div>
+          </section>
+
+          <div class="wizard-actions">
+            <button type="button" class="secondary-button" id="prevBtn">上一步</button>
+            <button type="button" id="nextBtn">下一步</button>
+            <button type="submit" id="submitBtn">開始 AI 評估</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="analysis-section hidden" id="analysisCard">
+      <p class="section-eyebrow">AI Analysis</p>
+      <h2>正在分析你的物品</h2>
+
+      <div class="analysis-steps">
+        <p class="analysis-step active">正在評估使用價值</p>
+        <p class="analysis-step">正在判斷情感連結</p>
+        <p class="analysis-step">正在估算二手可能性</p>
+      </div>
+    </section>
+
+    <section class="result-section hidden" id="resultCard"></section>
+  </main>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
