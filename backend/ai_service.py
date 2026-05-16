@@ -1,18 +1,3 @@
-"""
-─────────────────────────────────────────────────────────────────
-這個檔請組員放到他們 repo（11402_AIproject）的根目錄。
-作用：把 FinalEvaluator 包成 HTTP 服務，後端就能用 HTTP 呼叫。
-
-啟動方式（在 11402_AIproject 根目錄）：
-    pip install fastapi uvicorn pydantic
-    uvicorn ai_service:app --host 0.0.0.0 --port 8001
-
-啟動後測試：
-    curl -X POST http://localhost:8001/evaluate \
-      -H "Content-Type: application/json" \
-      -d '{"text":"這是高中時的相機，畢業旅行用的"}'
-─────────────────────────────────────────────────────────────────
-"""
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
