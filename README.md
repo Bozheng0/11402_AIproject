@@ -531,13 +531,13 @@ history
 
 ## 十二、安裝套件
 
-請先安裝所需套件：
+請先安裝本專案所需套件：
 
 ```bash
 pip install -r requirements.txt
 ```
 
-`requirements.txt` 主要包含：
+`requirements.txt` 主要包含以下套件：
 
 ```text
 torch
@@ -549,6 +549,19 @@ openpyxl
 matplotlib
 joblib
 ```
+
+### 套件用途說明
+
+| 套件 | 用途 |
+|---|---|
+| torch | 建立與訓練 BiLSTM + Attention 深度學習模型 |
+| numpy | 數值運算與 soft_score 計算 |
+| pandas | 讀取與處理 Excel、CSV 資料 |
+| scikit-learn | 資料切分、評估 Accuracy、Macro-F1、分類報告 |
+| tqdm | 顯示訓練與測試進度條 |
+| openpyxl | 讀取 `.xlsx` Excel 檔案 |
+| matplotlib | 繪製訓練結果或分析圖表 |
+| joblib | 儲存或載入部分模型與資料處理物件 |
 
 ## 十三、主要檔案
 
