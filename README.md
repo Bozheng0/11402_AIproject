@@ -20,11 +20,11 @@
 
 ```text
 data/
-├── raw/              原始訓練與測試資料（未上傳大型檔案）
-└── predictions/      模型預測結果（未上傳大型檔案）
+├── raw/              原始訓練與測試資料（data.txt有雲端連結）
+└── predictions/      模型預測結果（本次測試的沒有上傳 誤刪了）
 
 models/
-└── best_macro_f1_bilstm_attention_model.pt   訓練完成的模型檔案（未上傳大型檔案）
+└── best_macro_f1_bilstm_attention_model.pt   訓練完成的模型檔案（模型資料.txt）
 
 notebooks/
 └── 使用價值.ipynb    主要實作 Notebook
