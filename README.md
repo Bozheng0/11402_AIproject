@@ -39,10 +39,6 @@ $$Score = Score_{base} + \Delta Score_{emotion} + \Delta Score_{motivation}$$
 * `scripts/`: 包含基礎訓練與領域適應微調腳本。
 * `models/`: 存放 `.pt` 權重檔（需手動放入）。
 * `data/`: 存放 CSV 訓練集與 JSONL 微調資料。
-* `templates/`: 存放前端 HTML 頁面，目前主要為 `index.html`。
-* `static/`: 存放前端靜態資源，包含 CSS 與 JavaScript。
-* `static/style.css`: 前端頁面樣式設計，包含整體配色、版面、卡片與互動效果。
-* `static/script.js`: 前端互動邏輯，包含分步驟表單、使用者輸入整理、欄位摘要顯示與呼叫後端 API。
   
 ## 快速啟動
 1. `pip install -r requirements.txt`
