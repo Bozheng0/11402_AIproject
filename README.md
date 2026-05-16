@@ -30,7 +30,6 @@ notebooks/
 └── 使用價值.ipynb    主要實作 Notebook
 
 README.md             專案說明文件
-requirements.txt      專案所需套件
 ```
 
 > 注意：由於模型檔與資料集檔案較大，因此 GitHub 版本中可能只保留資料夾結構，不直接上傳 `.pt`、`.xlsx`、`.csv` 等大型檔案。
