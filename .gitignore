@@ -1,0 +1,14 @@
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.DS_Store
+
+# 不上傳模型
+models/*
+*.pt
+*.pth
+
+# 不上傳資料
+data/*
+*.xlsx
+*.csv
