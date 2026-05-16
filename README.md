@@ -422,6 +422,7 @@ tqdm
 openpyxl
 matplotlib
 joblib
+
 ##十三、主要檔案
 notebooks/使用價值.ipynb
 models/best_macro_f1_bilstm_attention_model.pt
