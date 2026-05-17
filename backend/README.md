@@ -1,6 +1,6 @@
 # 斷捨離 Adapter (Backend)
 
-> 第三組專題 · 前端跟同學 ai_server 之間的翻譯層
+> 第三組專題 · 前端跟 ai_server 之間的翻譯層
 
 ## 架構
 
@@ -51,15 +51,15 @@ uvicorn main:app --port 8080 --reload
 }
 ```
 
-## 翻譯邏輯（給組員看）
+## 翻譯邏輯
 
 | 欄位 | 來源 |
 |---|---|
-| `category` → `category_name` | services/category_map.py（給同學 review） |
+| `category` → `category_name` | services/category_map.py |
 | `usage_frequency` → `item_condition_id` | new→1, yearly→2, monthly/weekly→3, daily→4 |
-| `shipping` | 寫死 1（買家付）— 同學確認 |
+| `shipping` | 寫死 1（買家付） |
 | `usage_period` + `usage_frequency` | 拼進 text_input 前綴 |
-| `secondhand` (USD) → `secondhand_value` (0-100) | services/scoring.py，分段對齊同學 fuzzy zones |
+| `secondhand` (USD) → `secondhand_value` (0-100) | services/scoring.py，分段對齊 fuzzy zones |
 | `usevalue` (0-4) → `use_value` (0-100) | × 25 |
 | `final_decision` (EN) → `recommendation` (中文) | KEEP→建議保留 等 |
 
