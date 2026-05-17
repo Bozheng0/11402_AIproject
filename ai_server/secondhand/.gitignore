@@ -1,0 +1,7 @@
+mercari_ext/progress/
+mercari_ext/docs/
+mercari_ext/venv/
+mercari_ext/result
+mercari_ext/models_exported/*
+mercari_ext/results.csv
+input/*
