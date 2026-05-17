@@ -1,0 +1,11 @@
+﻿numpy==2.3.0
+pandas==2.3.0
+scikit-fuzzy==0.5.0
+scikit-learn==1.7.0
+networkx==3.5
+packaging==25.0
+fastapi
+uvicorn
+pydantic
+google-genai
+python-dotenv
