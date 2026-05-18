@@ -154,7 +154,7 @@ itemForm.addEventListener("submit", async function (event) {
     emotional_description: document.querySelector("#emotionalDescription").value
   };
 
-  showAnalysis();
+  startAnalysisAnimation();
 
   try {
     const response = await fetch("/predict", {
@@ -162,13 +162,13 @@ itemForm.addEventListener("submit", async function (event) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(formData),
-      signal: controller.signal
+      body: JSON.stringify(formData)
     });
 
-    clearTimeout(timeout);
+
     if (!response.ok) throw new Error("後端錯誤");
     const data = await response.json();
+    stopAnalysisAnimation();
     renderResult(data);
 
   } catch (error) {
@@ -306,6 +306,40 @@ function validateCurrentStep() {
 
   return true;
 }
+
+let animationInterval;
+
+function startAnalysisAnimation() {
+  resultCard.classList.add("hidden");
+  analysisCard.classList.remove("hidden");
+
+  const steps = document.querySelectorAll(".analysis-step");
+  let index = 0;
+
+  steps.forEach(s => s.classList.remove("active"));
+
+  analysisCard.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+  animationInterval = setInterval(() => {
+    steps.forEach(s => s.classList.remove("active"));
+
+    steps[index].classList.add("active");
+
+    index = (index + 1) % steps.length; // 循環
+  }, 450);
+}
+
+
+function stopAnalysisAnimation() {
+  clearInterval(animationInterval);
+
+  const steps = document.querySelectorAll(".analysis-step");
+  steps.forEach(s => s.classList.remove("active"));
+}
+
 
 function showAnalysis() {
   resultCard.classList.add("hidden");
