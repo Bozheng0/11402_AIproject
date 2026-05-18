@@ -741,6 +741,21 @@ textarea:focus {
   font-weight: 900;
 }
 
+.score-title div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.score-extra {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sage-dark);
+  background: var(--oat);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
 .bar {
   height: 12px;
   border-radius: 999px;

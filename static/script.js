@@ -162,18 +162,15 @@ itemForm.addEventListener("submit", async function (event) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(formData),
+      signal: controller.signal
     });
 
-    if (!response.ok) {
-      throw new Error("後端回傳錯誤");
-    }
-
+    clearTimeout(timeout);
+    if (!response.ok) throw new Error("後端錯誤");
     const data = await response.json();
+    renderResult(data);
 
-    setTimeout(() => {
-      renderResult(data);
-    }, 1400);
   } catch (error) {
     analysisCard.classList.add("hidden");
     resultCard.classList.remove("hidden");
@@ -341,6 +338,11 @@ function renderResult(data) {
     ? `<img src="${uploadedImageDataUrl}" alt="物品照片" />`
     : `<span>未上傳物品照片</span>`;
 
+  // 格式化美金顯示
+  const priceDisplay = data.secondhand_price_usd !== undefined 
+    ? `預估 $${data.secondhand_price_usd}` 
+    : "";
+
   resultCard.innerHTML = `
     <div class="result-header">
       <h2>${data.item_name || "這個物品"} 的整理建議</h2>
@@ -356,7 +358,7 @@ function renderResult(data) {
         ${createScoreItem("總價值分數", data.total_score)}
         ${createScoreItem("使用價值", data.use_value)}
         ${createScoreItem("情感價值", data.emotional_value)}
-        ${createScoreItem("二手價值", data.secondhand_value)}
+        ${createScoreItem("二手價值", data.secondhand_value, priceDisplay)}
       </div>
     </div>
 
@@ -372,11 +374,15 @@ function renderResult(data) {
   });
 }
 
-function createScoreItem(title, score) {
+function createScoreItem(title, score, extraText = "") {
+  const extraHtml = extraText ? `<span class="score-extra">${extraText}</span>` : "";
   return `
     <div class="score-item">
       <div class="score-title">
-        <span>${title}</span>
+        <div>
+          <span>${title}</span>
+          ${extraHtml}
+        </div>
         <span>${score} / 100</span>
       </div>
       <div class="bar">
