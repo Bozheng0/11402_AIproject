@@ -5,6 +5,9 @@ FastAPI backend (adapter)
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import os
 
 from config import settings
 from routers import predict
@@ -39,3 +42,12 @@ async def health():
         "ai_service": "healthy" if ai_alive else "unreachable",
         "ai_service_url": settings.ai_service_url,
     }
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+@app.get("/")
+async def index():
+    return FileResponse(os.path.join(BASE_DIR, "templates", "index.html"))
+
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")

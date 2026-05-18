@@ -22,7 +22,7 @@ _client = httpx.AsyncClient(
 
 async def predict(req: AIServerPredictRequest) -> AIServerPredictResponse:
     try:
-        r = await _client.post("/predict", json=req.model_dump())
+        r = await _client.post("/predict", json=req.model_dump(), timeout=180)
         r.raise_for_status()
     except httpx.HTTPStatusError as e:
         raise AIServiceError(f"/predict 回 {e.response.status_code}: {e.response.text[:200]}") from e
@@ -34,7 +34,7 @@ async def predict(req: AIServerPredictRequest) -> AIServerPredictResponse:
 async def explain(req: AIServerExplainRequest) -> str:
     """同學的 /explain 用 Gemini 寫人話，失敗時 caller 自己 fallback"""
     try:
-        r = await _client.post("/explain", json=req.model_dump())
+        r = await _client.post("/explain", json=req.model_dump(), timeout=180)
         r.raise_for_status()
     except httpx.HTTPError as e:
         raise AIServiceError(f"/explain 失敗：{e}") from e
