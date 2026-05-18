@@ -106,24 +106,43 @@ async def explain(request: ExplainRequest):
         input_data = request.input_data
         predict_res = request.predict_result
         
-        prompt = f"""You are an intelligent decluttering AI assistant.
+        prompt = f"""
+你是一個「斷捨離 AI 助理」，請用**繁體中文**寫一段完整分析文章。
 
-Based on the following information, explain why the system recommends keeping, selling, donating, or discarding the item.
+你的任務是解釋為什麼系統會建議「保留 / 出售 / 捐贈 / 丟棄」這個物品。
 
-Item Information:
-- Name: {input_data.secondhand_input.name}
-- Description: {input_data.secondhand_input.item_description}
+請注意：
+- 一定要用「繁體中文」
+- 一定要用「文章形式」，不要條列
+- 不要使用 bullet points
+- 不要使用英文回答
+- 語氣要溫和、有同理心、像 AI 顧問
 
-User Description:
+請依照以下資訊撰寫：
+
+物品名稱：
+{input_data.secondhand_input.name}
+
+物品描述：
+{input_data.secondhand_input.item_description}
+
+使用者補充描述：
 {input_data.text_input}
 
-Model Analysis Results:
-- Secondhand Value: {predict_res.secondhand}
-- Sentimental Value: {predict_res.sentiment}
-- Usage Value: {predict_res.usevalue}
-- Final Decision: {predict_res.final_decision}
+AI 模型分析結果：
+- 二手價值：{predict_res.secondhand}
+- 情感價值：{predict_res.sentiment}
+- 使用價值：{predict_res.usevalue}
+- 最終決策：{predict_res.final_decision}
 
-Please provide a detailed explanation in a natural and supportive tone, like a thoughtful AI assistant. The explanation should clearly align with the final decision and reference the item's emotional, practical, and resale value where appropriate.
+---
+
+請輸出一段完整中文分析文章，內容需包含：
+1. 對這個決策的總體解釋
+2. 使用價值的分析
+3. 情感價值的分析
+4. 二手價值的考量
+5. 最後溫和收尾建議
 """
 
         response = client.models.generate_content(
