@@ -2,14 +2,12 @@ import sys
 import os
 import time
 
-# --- 核心修正：將專案根目錄加入 Python 搜尋路徑 ---
-# 這行能讓處於 tests/ 資料夾內的腳本順利找到 core/inference_engine
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from core.inference_engine import FinalEvaluator
 
 def run_test_suite():
-    # 初始化模型
+
     print("正在從核心引擎載入模型，請稍候...")
     try:
         ev = FinalEvaluator()
@@ -17,7 +15,6 @@ def run_test_suite():
         print(f"❌ 引擎初始化失敗: {e}")
         return
 
-    # 定義分類測試案例 (與你原本的內容一致)
     test_data = {
         "情感傳承類 (預期: 保留)": [
             "這是去世的爺爺親手削的鉛筆，我一直放在文具盒裡。",
@@ -72,7 +69,6 @@ def run_test_suite():
             d = res['details']
             decision = res['decision']
             
-            # 統計結果
             if "Keep" in decision or "保留" in decision:
                 results_summary["保留 (Keep)"] += 1
                 icon = "✅"
@@ -81,9 +77,7 @@ def run_test_suite():
                 icon = "🗑️"
 
             print(f"{icon} 輸入: {text}")
-            # 顯示情緒與信心度
             print(f"   -> 分數: {res['final_score']} | 情緒: {d['emotion']['label']} ({d['emotion']['conf']*100:.1f}%)")
-            # 顯示馬斯洛與瑞斯動機
             print(f"   -> 心理: 需求={d['maslow']['label']} | 動機={d['reiss']['label']} | 強度={d['intensity']:.2f}")
             print(f"   -> 決策: {res['decision']}")
         print("-" * 40)
