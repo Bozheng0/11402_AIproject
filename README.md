@@ -76,7 +76,7 @@ GROQ_API_KEY=您的_GROQ_API_KEY
 
 在該目錄下執行：
 ```bash
-docker compose up -d
+docker compose up 
 ```
 
 ### 3. 訪問系統
