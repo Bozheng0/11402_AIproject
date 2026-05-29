@@ -8,7 +8,6 @@ import torch.nn.functional as F
 import os
 import sys
 
-# 確保能找到核心架構定義
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from core.model_arch import DanshariClassifier, IntensityRegressor, MultiTaskMotivationClassifier
 
@@ -23,7 +22,6 @@ class CustomTuningDataset(Dataset):
         with open(file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 item = json.loads(line)
-                # 自動修正資料集中的不相容標籤
                 if item['emotion'] == 'guilt': item['emotion'] = 'remorse'
                 if item['emotion'] == 'nostalgia': item['emotion'] = 'love'
                 self.data.append(item)
@@ -53,7 +51,6 @@ def finetune():
 
     model_dir = os.path.join(os.path.dirname(__file__), "..", "models")
     
-    # 載入現有模型
     model_emo = DanshariClassifier(model_name).to(device)
     model_emo.load_state_dict(torch.load(os.path.join(model_dir, "emotion_model.pt"), map_location=device))
     
