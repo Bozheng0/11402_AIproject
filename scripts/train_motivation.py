@@ -9,14 +9,12 @@ import os
 import sys
 import ast
 
-# --- 1. 環境路徑設定 (放在最外層) ---
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
 sys.path.append(PROJECT_ROOT)
 
 from core.model_arch import MultiTaskMotivationClassifier
 
-# --- 2. 配置與標籤定義 ---
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_NAME = "bert-base-multilingual-cased"
 SAVE_PATH = os.path.join(PROJECT_ROOT, "models", "motivation_model.pt")
@@ -33,13 +31,11 @@ def get_idx(val, labels):
         return labels.index(final) if final in labels else labels.index('neutral')
     except: return labels.index('neutral')
 
-# --- 3. 主訓練程式 ---
 def train():
-    # 確保函數內部能存取到全域變數
     global PROJECT_ROOT, SAVE_PATH 
     
     print("🚀 載入心理動機資料...")
-    # 定位至 data 資料夾下的檔案
+
     motiv_csv = os.path.join(PROJECT_ROOT, "data", "motiv.csv")
     emo_csv = os.path.join(PROJECT_ROOT, "data", "emo.csv")
     
@@ -85,7 +81,6 @@ def train():
             loop.set_description(f"Epoch [{epoch+1}/10]")
             loop.set_postfix(loss=loss.item())
 
-    # 確保儲存路徑的資料夾存在
     os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
     torch.save(model.state_dict(), SAVE_PATH)
     print(f"✅ 心理動機模型訓練完成！已儲存至 {SAVE_PATH}")
