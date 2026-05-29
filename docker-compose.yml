@@ -1,0 +1,34 @@
+services:
+  ai_server:
+    # 指定 Docker Hub 上的映像檔名稱
+    image: mrcengbo0/11402aiproject-ai-server:latest
+    build:
+      context: .
+      dockerfile: ai_server/Dockerfile
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+    ports:
+      - "8000:8000"
+    volumes:
+      # 模型檔案建議掛載到主機的固定路徑
+      - ./ai_server/secondhand/mercari_ext/models_exported:/app/ai_server/secondhand/mercari_ext/models_exported
+      - ./ai_server/sentiment/models:/app/ai_server/sentiment/models
+      - ./ai_server/usevalue/models:/app/ai_server/usevalue/models
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+  backend:
+    image: mrcengbo0/11402aiproject-backend:latest
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - AI_SERVICE_URL=http://ai_server:8000
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ai_server
+    restart: always
