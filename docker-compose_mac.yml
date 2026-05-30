@@ -1,0 +1,25 @@
+services:
+  ai_server:
+    platform: linux/amd64
+    image: mrcengbo0/11402aiproject-ai-server:latest
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./ai_server/secondhand/mercari_ext/models_exported:/app/ai_server/secondhand/mercari_ext/models_exported
+      - ./ai_server/sentiment/models:/app/ai_server/sentiment/models
+      - ./ai_server/usevalue/models:/app/ai_server/usevalue/models
+    restart: always
+
+  backend:
+    platform: linux/amd64
+    image: mrcengbo0/11402aiproject-backend:latest
+    environment:
+      - AI_SERVICE_URL=http://ai_server:8000
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ai_server
+    restart: always
