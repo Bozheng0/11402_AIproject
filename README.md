@@ -128,6 +128,5 @@ docker compose restart
 ```
 其他一樣
 
-測試 API 是否正常運作。
 ### 3. 訪問系統
 - **前端主介面**: `http://localhost:8080/`
