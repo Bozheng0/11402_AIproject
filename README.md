@@ -78,45 +78,78 @@ GROQ_API_KEY=您的_GROQ_API_KEY
 ```bash
 docker compose up 
 ```
-Mac 使用者注意事項
+### 2. 啟動服務
 
-如果是在 Mac，尤其是 Apple Silicon Mac，可能會遇到 TensorFlow 版本相容性問題，導致二手價格預測模型出現 Illegal instruction 錯誤。
+在該目錄下執行：
+
+```bash
+docker compose up
+```
+
+啟動後可開啟：
+
+```text
+http://localhost:8000/docs
+```
+
+進入 FastAPI 測試頁面，或開啟：
+
+```text
+http://localhost:8080/
+```
+
+進入前端頁面。
+
+---
+
+#### Mac 使用者注意事項
+
+如果是在 Mac，尤其是 Apple Silicon Mac，可能會遇到 TensorFlow 版本相容性問題，導致二手價格預測模型出現 `Illegal instruction` 錯誤。
 
 請先在專案目錄下啟動服務：
 
+```bash
 docker compose up
+```
 
 接著另外開一個新的 Terminal，進入同一個專案目錄，執行以下指令重新安裝 TensorFlow：
 
+```bash
 docker compose exec ai_server bash -lc '
 /app/ai_server/secondhand/mercari_ext/venv/bin/pip uninstall -y tensorflow tensorflow-cpu tensorflow-gpu tensorflow-estimator tensorflow-cpu-estimator tensorboard
 /app/ai_server/secondhand/mercari_ext/venv/bin/pip install --no-cache-dir tensorflow==1.5.0
 '
+```
 
 安裝完成後，執行以下指令確認 TensorFlow 是否可以正常載入：
 
+```bash
 docker compose exec ai_server bash -lc '
 /app/ai_server/secondhand/mercari_ext/venv/bin/python -c "import tensorflow as tf; print(tf.__version__)"
 echo RETURN_CODE:$?
 '
+```
 
 如果輸出類似以下內容，代表 TensorFlow 可以正常使用：
 
+```text
 1.5.0
 RETURN_CODE:0
+```
 
 如果出現以下內容，代表目前環境仍然不相容：
 
+```text
 Illegal instruction
 RETURN_CODE:132
+```
 
 確認 TensorFlow 可以正常載入後，重啟服務：
 
+```bash
 docker compose restart
-
-接著即可重新開啟：
-
-http://localhost:8000/docs
+```
+其他一樣
 
 測試 API 是否正常運作。
 ### 3. 訪問系統
