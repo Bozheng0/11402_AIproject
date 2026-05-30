@@ -78,29 +78,6 @@ GROQ_API_KEY=您的_GROQ_API_KEY
 ```bash
 docker compose up 
 ```
-### 2. 啟動服務
-
-在該目錄下執行：
-
-```bash
-docker compose up
-```
-
-啟動後可開啟：
-
-```text
-http://localhost:8000/docs
-```
-
-進入 FastAPI 測試頁面，或開啟：
-
-```text
-http://localhost:8080/
-```
-
-進入前端頁面。
-
----
 
 #### Mac 使用者注意事項
 
